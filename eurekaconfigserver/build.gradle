@@ -1,0 +1,63 @@
+buildscript {
+    ext {
+        kotlinVersion = '1.2.51'
+        springBootVersion = '1.5.16.RELEASE'
+    }
+    repositories {
+        maven { url "http://localhost:8085/repository/maven-central/" }
+        maven { url "http://repo1.maven.org/maven2" }
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}")
+        classpath("org.jetbrains.kotlin:kotlin-allopen:${kotlinVersion}")
+    }
+}
+
+apply plugin: 'kotlin'
+apply plugin: 'kotlin-spring'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+
+group = 'hycai.springcloud'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+compileKotlin {
+    kotlinOptions {
+        freeCompilerArgs = ["-Xjsr305=strict"]
+        jvmTarget = "1.8"
+    }
+}
+compileTestKotlin {
+    kotlinOptions {
+        freeCompilerArgs = ["-Xjsr305=strict"]
+        jvmTarget = "1.8"
+    }
+}
+
+repositories {
+    maven { url "http://localhost:8085/repository/maven-central/" }
+    maven { url "http://repo1.maven.org/maven2" }
+    mavenCentral()
+    jcenter()
+}
+
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:Edgware.SR5"
+    }
+}
+
+dependencies {
+    compile('org.springframework.boot:spring-boot-starter-web')
+    compile('org.springframework.cloud:spring-cloud-starter-eureka')
+    //启用配置中心
+    compile('org.springframework.cloud:spring-cloud-config-server')
+
+    compile('com.fasterxml.jackson.module:jackson-module-kotlin')
+    compile("org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}")
+    compile("org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}")
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+}
