@@ -4,9 +4,8 @@ buildscript {
         springBootVersion = '1.5.16.RELEASE'
     }
     repositories {
+        maven { url "http://localhost:8085/repository/maven-central/" }
         mavenCentral()
-        maven { url "https://repo.spring.io/snapshot" }
-        maven { url "https://repo.spring.io/milestone" }
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
@@ -37,14 +36,9 @@ compileTestKotlin {
 }
 
 repositories {
+    maven { url "http://localhost:8085/repository/maven-central/" }
     mavenCentral()
     jcenter()
-    maven { url "https://repo.spring.io/snapshot" }
-    maven { url "https://repo.spring.io/milestone" }
-    maven { url 'https://repo.spring.io/release/' }
-    maven { url "http://repo.spring.io/libs-snapshot-local" }
-    maven { url "http://repo.spring.io/libs-milestone-local" }
-    maven { url "http://repo.spring.io/libs-release-local" }
 }
 
 
@@ -57,9 +51,18 @@ dependencyManagement {
 dependencies {
     compile('org.springframework.boot:spring-boot-starter-web')
     compile('org.springframework.boot:spring-boot-starter-actuator')
+    
+    //使用eureka客户端
     compile('org.springframework.cloud:spring-cloud-starter-eureka')
+    
+    //使用feigen+ribbon实现第三方服务调用并做负载均衡
     compile('org.springframework.cloud:spring-cloud-starter-feign')
     compile('org.springframework.cloud:spring-cloud-starter-ribbon')
+    
+    //使用hystrix开启熔断器
+    compile('org.springframework.cloud:spring-cloud-starter-hystrix')
+    //开启hystrix仪表盘
+    compile('org.springframework.cloud:spring-cloud-starter-hystrix-dashboard')
 
     compile('com.fasterxml.jackson.module:jackson-module-kotlin')
     compile("org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}")

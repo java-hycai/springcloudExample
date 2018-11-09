@@ -5,7 +5,6 @@ buildscript {
     }
     repositories {
         maven { url "http://localhost:8085/repository/maven-central/" }
-        maven { url "http://repo1.maven.org/maven2" }
         mavenCentral()
     }
     dependencies {
@@ -38,7 +37,6 @@ compileTestKotlin {
 
 repositories {
     maven { url "http://localhost:8085/repository/maven-central/" }
-    maven { url "http://repo1.maven.org/maven2" }
     mavenCentral()
     jcenter()
 }
@@ -53,7 +51,18 @@ dependencyManagement {
 dependencies {
     compile('org.springframework.boot:spring-boot-starter-web')
     compile('org.springframework.boot:spring-boot-starter-actuator')
+    
+    //使用eureka客户端
     compile('org.springframework.cloud:spring-cloud-starter-eureka')
+    
+    //使用ribbon实现第三方服务调用并做负载均衡
+    compile('org.springframework.cloud:spring-cloud-starter-ribbon')
+    
+    //使用hystrix开启熔断器
+    compile('org.springframework.cloud:spring-cloud-starter-hystrix')
+
+    //使用zull开启网关
+    compile('org.springframework.cloud:spring-cloud-starter-zuul')
 
     compile('com.fasterxml.jackson.module:jackson-module-kotlin')
     compile("org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}")

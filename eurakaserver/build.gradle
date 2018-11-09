@@ -5,8 +5,6 @@ buildscript {
     }
     repositories {
         mavenCentral()
-        maven { url "https://repo.spring.io/snapshot" }
-        maven { url "https://repo.spring.io/milestone" }
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
@@ -37,14 +35,9 @@ compileTestKotlin {
 }
 
 repositories {
+    maven { url "http://localhost:8085/repository/maven-central/" }
     mavenCentral()
     jcenter()
-    maven { url "https://repo.spring.io/snapshot" }
-    maven { url "https://repo.spring.io/milestone" }
-    maven { url 'https://repo.spring.io/release/' }
-    maven { url "http://repo.spring.io/libs-snapshot-local" }
-    maven { url "http://repo.spring.io/libs-milestone-local" }
-    maven { url "http://repo.spring.io/libs-release-local" }
 }
 
 
