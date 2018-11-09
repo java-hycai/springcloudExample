@@ -54,6 +54,9 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-web')
     compile('org.springframework.boot:spring-boot-starter-actuator')
     compile('org.springframework.cloud:spring-cloud-starter-eureka')
+    
+    //启用config客户端
+    compile('org.springframework.cloud:spring-cloud-starter-config')
 
     compile('com.fasterxml.jackson.module:jackson-module-kotlin')
     compile("org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}")
